@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  poc:
+    image: poc-app:1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=./build/libs/poc-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8081:8081"
