@@ -1,0 +1,1 @@
+#Example of RabbitMQ on Spring Boot training to reproduce exactly-once behavior using 

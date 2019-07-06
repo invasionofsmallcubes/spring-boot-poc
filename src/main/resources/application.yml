@@ -1,0 +1,26 @@
+server:
+  port: ${APP_HTTP_PORT:8081}
+spring:
+  cloud:
+    stream:
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: mq
+                port: 5672
+                username: rabbitmq
+                password: rabbitmq
+                virtual-host: /
+      bindings:
+        input:
+          destination: queue.log.messages
+          group: logMessageConsumers
+          binder: local_rabbit
+        output:
+          destination: queue.log.messages
+          binder: local_rabbit
+      instance-count: ${APP_MESSAGE_COUNT:1}
+      instance-index: ${APP_MESSAGE_INDEX:0}

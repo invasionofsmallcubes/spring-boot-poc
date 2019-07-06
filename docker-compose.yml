@@ -1,12 +1,48 @@
-version: '3'
+version: '3.7'
 
 services:
-  poc:
-    image: poc-app:1
+  mq:
+    image: "rabbitmq:3.7.15-management"
+    hostname: "mq"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "mq"
+    volumes:
+      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+  poc1:
+    image: poc1-app:1
+    depends_on:
+      - 'mq'
     build:
       context: .
       dockerfile: Dockerfile
       args:
         - JAR_FILE=./build/libs/poc-0.0.1-SNAPSHOT.jar
+    environment:
+        - APP_HTTP_PORT=8081
+        - APP_MESSAGE_COUNT=2
+        - APP_MESSAGE_INDEX=0
     ports:
       - "8081:8081"
+  poc2:
+    image: poc2-app:1
+    depends_on:
+      - 'mq'
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=./build/libs/poc-0.0.1-SNAPSHOT.jar
+    environment:
+        - APP_HTTP_PORT=8082
+        - APP_MESSAGE_COUNT=2
+        - APP_MESSAGE_INDEX=1
+    ports:
+      - "8082:8082"
