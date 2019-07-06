@@ -1,4 +1,4 @@
-#Example of RabbitMQ on Spring Boot training to reproduce exactly-once behavior using 
+#Example of RabbitMQ on Spring Boot training to reproduce exactly-once behavior using Spring Cloud Stream
 
 To run the example:
 `make run-example`
