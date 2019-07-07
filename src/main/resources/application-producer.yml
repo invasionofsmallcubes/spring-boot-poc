@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: queue.log.messages
+          binder: local_rabbit

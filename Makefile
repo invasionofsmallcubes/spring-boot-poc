@@ -10,4 +10,4 @@ run-example:
 
 .PHONY: run-batch
 run-batch:
-	curl http://localhost:8081/woosh
+	curl http://localhost:8082/woosh
