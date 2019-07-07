@@ -1,12 +1,13 @@
 package com.invasionofsmallcubes.poc.messaging;
 
 public class LogMessage {
+
     private String message;
 
     public LogMessage() {
     }
 
-    public LogMessage(String message) {
+    LogMessage(String message) {
         this.message = message;
     }
 
