@@ -6,16 +6,12 @@ import org.springframework.amqp.rabbit.batch.BatchingStrategy;
 import org.springframework.amqp.rabbit.batch.SimpleBatchingStrategy;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.BatchingRabbitTemplate;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.scheduling.TaskScheduler;
 
 import java.util.function.Consumer;
-
-import static java.util.stream.IntStream.range;
 
 @Configuration
 public class BeanConfiguration {
@@ -29,10 +25,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public Consumer<Message<LogMessage>> input() {
-        return msg -> {
-            System.out.println(msg);
-            logger.info("New Message: {}", msg.getPayload().getMessage());
-        };
+    public Consumer<Message<?>> input() {
+        return msg -> System.out.println(msg.getHeaders().entrySet());
     }
 }

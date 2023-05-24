@@ -1,6 +1,8 @@
 package com.invasionofsmallcubes.poc.messaging;
 
-public class LogMessage {
+import java.io.Serializable;
+
+public class LogMessage implements Serializable {
 
     private String message;
 
