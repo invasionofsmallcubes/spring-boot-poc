@@ -1,5 +1,5 @@
 ifneq (,)
-This makefile requires GNU Make.
+	This makefile requires GNU Make.
 endif
 
 .PHONY: run-example

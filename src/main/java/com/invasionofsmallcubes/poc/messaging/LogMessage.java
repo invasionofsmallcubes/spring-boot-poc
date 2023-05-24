@@ -7,7 +7,7 @@ public class LogMessage {
     public LogMessage() {
     }
 
-    LogMessage(String message) {
+    public LogMessage(String message) {
         this.message = message;
     }
 
